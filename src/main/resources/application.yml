@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/quartz_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123
+
+  quartz:
+    # 相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: scheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    # 数据库方式
+    job-store-type: jdbc
+      # 初始化表结构
+      #jdbc:
+    #initialize-schema: never
+
+## mybatis 配置
+mybatis:
+  mapper-locations: classpath:mappings/*.xml
+  type-aliases-package: com.wenlincheng.quartz.pojo
