@@ -1,4 +1,3 @@
- 
 -- 存储每一个已配置的 Job 的详细信息
 CREATE TABLE qrtz_job_details
   (
